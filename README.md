@@ -1,6 +1,6 @@
 <p align="center">
 <a href="" rel="noopener">
- <img align="center" width="250" height="250" src="logo.png" alt="Poka."></a>
+ <img align="center" width="250" height="250" src="img/logo.png" alt="Poka."></a>
 </p>
 
 # Poka: the Poker Game
@@ -9,12 +9,13 @@
 
 - [About](#about)
 - [Usage](#usage)
-- [To-Do](#todo)
+- [Progress](#prog)
+- [Todo](#todo)
 - [Contributors](#contributors)
 
 ## About <a name = "about"></a>
 
-Poka is a text-based game of poker.
+Poka is a text-based game of poker. I hope to continue this as a project during quarantine.
 
 ## Usage <a name = "usage"></a>
 
@@ -24,11 +25,18 @@ Just run `main_loop.py` with Python to run the game.
 
 You only need Python (preferably newer versions than 3.7.2) to interpret and run this game.
 
-## To-Do <a name = "usage"></a>
+## Progress <a name = "prog"></a>
 
-- More of the game loop.
-- Automatic hand detection.
-- More game types than just Hold'Em (which is boring.)
+* ~~Bare minimum to run correctly~~
+* Minimum viable product
+* I am satisfied (will never be checked off)
+* Multiple gamemodes
+
+### To-Do <a name = "todo"></a>
+
+1. More of the game loop.
+2. Automatic hand detection.
+3. More game types than just Hold'Em (which is boring.)
 
 ## Contributors <a name = "contributors"></a>
 
