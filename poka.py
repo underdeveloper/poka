@@ -157,6 +157,6 @@ def game_start(table):
 def game_update(table):
     return
 
-le_tableau = Table("Mr. Wiener")
+le_tableau = Table("Distinguished Gentleman with a Formal Name Suitable for this Establishment and NOT Something Juvenile such as \"Mr. Wiener\"")
 
 game_start(le_tableau)
