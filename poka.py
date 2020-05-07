@@ -94,14 +94,15 @@ class Table():
     def __init__(self, dealer_name):
         self.deck = Deck()
         self.dealer =  HandDealer(dealer_name)
-        self.players = [] # : array [0..9] of HandPlayer()
-        self.player_seats = ["Small Blind", "Big Blind", "Under the Gun", "Under the Gun Plus One", "Under the Gun Plus Two", "Middle Position", "Second Middle Position" "The Hijack", "The Cutoff", "The Button"]
-        self.player_abbv = ["sb", "bb", "utg", "utg+1", "utg+2", "mp", "mp2", "co", "hj", "btn"]
+        self.players = [self.dealer] # : array [0..9] of HandPlayer()
+        self.player_seats = ["The Button", "Small Blind", "Big Blind", "Under the Gun", "Under the Gun Plus One", "Under the Gun Plus Two", "Middle Position", "Second Middle Position" "The Hijack", "The Cutoff"]
+        self.player_abbv = ["btn", "sb", "bb", "utg", "utg+1", "utg+2", "mp", "mp2", "co", "hj"]
     def register_player(self, player_name):
         self.players.append(HandPlayer(player_name))
     def show_players(self):
-        for i in range(len(self.players)):
-            print("[Seat " + str(i+1) + "] " + self.player_seats[i] + ": " + self.players[i].HOLDER)
+        for i in range(1, len(self.players)):
+            print("[Seat " + str(i) + "] " + self.player_seats[i] + ": " + self.players[i].HOLDER)
+        print("[Dealer] The Button: " + self.dealer.HOLDER)
     def flop(self):
         self.dealer.draw_cards(deck, 3)
     def turn(self):
@@ -136,7 +137,7 @@ def game_start(table):
             print("Please enter Player " + str(player_count) + "'s name.")
             this_player = input("> ")
             table.register_player(this_player)
-            print("Player " + str(player_count) + " \"" + this_player + "\" added as " + table.player_seats[player_count-1] + ".")
+            print("Player " + str(player_count) + " \"" + this_player + "\" added as " + table.player_seats[player_count] + ".")
             player_count += 1
             print("Would you like to add more players? [Y/N]")
             if player_count == 10:
