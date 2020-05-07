@@ -1,6 +1,6 @@
 <p align="center">
 <a href="" rel="noopener">
- <img align="center" width="250" height="250" src="logo.png" alt="Project logo"></a>
+ <img align="center" width="250" height="250" src="logo.png" alt="Poka."></a>
 </p>
 
 # Poka: the Poker Game
@@ -9,6 +9,7 @@
 
 - [About](#about)
 - [Usage](#usage)
+- [To-Do](#todo)
 - [Contributors](#contributors)
 
 ## About <a name = "about"></a>
@@ -23,6 +24,12 @@ Just run `main_loop.py` with Python to run the game.
 
 You only need Python (preferably newer versions than 3.7.2) to interpret and run this game.
 
-## Contributors <a name = "contributors"></>
+## To-Do <a name = "usage"></a>
+
+- More of the game loop.
+- Automatic hand detection.
+- More game types than just Hold'Em (which is boring.)
+
+## Contributors <a name = "contributors"></a>
 
 - [underdeveloper](https://github.com/underdeveloper)
