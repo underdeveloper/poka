@@ -1,2 +1,4 @@
 Name,Card1,Card2,Card3,Card4,Card5
-"Royal Flush",*/A,*/K,*/Q,*/J,*/0
+"Royal Flush",1/A,1/K,1/Q,1/J,1/0
+"Two Pair",1/_,1/_,2/_,2/_,*/*
+"One Pair",1/_,1/_,*/*,*/*,*/*

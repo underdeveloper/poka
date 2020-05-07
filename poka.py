@@ -101,7 +101,7 @@ class Table():
         self.players.append(HandPlayer(player_name))
     def show_players(self):
         for i in range(len(self.players)):
-            print("[ Seat " + str(i+1) + "] " + self.player_seats[i] + ": " + self.players[i].HOLDER)
+            print("[Seat " + str(i+1) + "] " + self.player_seats[i] + ": " + self.players[i].HOLDER)
     def flop(self):
         self.dealer.draw_cards(deck, 3)
     def turn(self):
@@ -131,8 +131,8 @@ def game_start(table):
         else:
             print("Invalid input, please try again.")
     if yn == "Y":
+        player_count = 3
         while True:
-            player_count = 3
             print("Please enter Player " + str(player_count) + "'s name.")
             this_player = input("> ")
             table.register_player(this_player)
@@ -154,9 +154,8 @@ def game_start(table):
     print("Here are the players.")
     table.show_players()
 
-def game_update(table):
+def game_pre_flop(table):
     return
 
-le_tableau = Table("Distinguished Gentleman with a Formal Name Suitable for this Establishment and NOT Something Juvenile such as \"Mr. Wiener\"")
-
-game_start(le_tableau)
+def game_post_flop(table):
+    return
