@@ -1,5 +1,7 @@
-![alt text](../logo.png "Hee hoo!")
-
+<p align="center">
+<a href="" rel="noopener">
+ <img align="center" width="250" height="250" src="logo.png" alt="Project logo"></a>
+</p>
 
 # Poka: the Poker Game
 
