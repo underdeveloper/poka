@@ -1,11 +1,12 @@
-from random import randint as ri
 from random import shuffle as sh
 
 class Card:
-    ''' Card'''
+    ''' A single card. '''
+
     def __init__(self, suit, rank):
         self.suit = suit # "s", "h", "c", "d"
         self.rank = rank # 1-15
+
     def display(self): 
         if self.rank == 11:
             displayed_rank = "J"
@@ -16,7 +17,7 @@ class Card:
         elif self.rank == 14:
             displayed_rank = "A"
         else:
-            displayed_rank = str(self.rank)
+            displayed_rank = str(self.rank) if self.rank < 10 else "0"
         return (str(self.suit) + "/" + displayed_rank)
 
 class Deck:
@@ -47,15 +48,15 @@ class CardCollection:
         some_deck.cards.pop(0)
     
     def draw_cards(self, some_deck, amount):
-        for i in range(amount):
+        for _ in range(amount):
             self.__draw_single(some_deck)
     
     def __sort_by_rank(self):
         card_amount = len(self.cards)
         if card_amount == 0:
-            print(self.PLAYER + "'s hand is empty.")
+            print(self.HOLDER + "'s hand is empty.")
         elif card_amount == 1:
-            print(self.PLAYER + "'s hand only has one card.")
+            print(self.HOLDER + "'s hand only has one card.")
         else:
             for i in range(0, card_amount):
                 idxmin = i
@@ -66,27 +67,15 @@ class CardCollection:
                 self.cards[i] = self.cards[idxmin]
                 self.cards[idxmin] = temp
 
-class PlayerHand(CardCollection):
+class HandPlayer(CardCollection):
     def __init__(self, holder):
         super().__init__(holder)
         self.bet = 0
 
     def display_hand(self):
         print(self.HOLDER + "'s hand:", end=' ')
-        __displayed = self
-        for i in range(len(__displayed.cards)):
-            if __displayed.cards[i].rank == 11:
-                __displayed.cards[i].rank = "J"
-            elif __displayed.cards[i].rank == 12:
-                __displayed.cards[i].rank = "Q"
-            elif __displayed.cards[i].rank == 13:
-                __displayed.cards[i].rank = "K"
-            elif __displayed.cards[i].rank == 14:
-                __displayed.cards[i].rank = "A"
-            else:
-                __displayed.cards[i].rank = str(__displayed.cards[i].rank)
-        for i in range(len(__displayed.cards)):
-            print(__displayed.cards[i].display(), end=' ')
+        for i in range(len(self.cards)):
+            print(self.cards[i].display(), end=' ')
         print("")
     
     def raise_bet(self, money):
@@ -94,48 +83,80 @@ class PlayerHand(CardCollection):
         self.bet += money
         print( self.HOLDER + "'s bet is now " + str(self.bet) + "." )
 
-class DealerHand(CardCollection):
+class HandDealer(CardCollection):
     def display_table(self):
         print("These are on the table:", end=' ')
         for i in range(len(self.cards)):
             print(self.cards[i].display(), end=' ')
         print("")
-    pass
 
+class Table():
+    def __init__(self, dealer_name):
+        self.deck = Deck()
+        self.dealer =  HandDealer(dealer_name)
+        self.players = [] # : array [0..9] of HandPlayer()
+        self.player_seats = ["Small Blind", "Big Blind", "Under the Gun", "Under the Gun Plus One", "Under the Gun Plus Two", "Middle Position", "Second Middle Position" "The Hijack", "The Cutoff", "The Button"]
+        self.player_abbv = ["sb", "bb", "utg", "utg+1", "utg+2", "mp", "mp2", "co", "hj", "btn"]
+    def register_player(self, player_name):
+        self.players.append(HandPlayer(player_name))
+    def show_players(self):
+        for i in range(len(self.players)):
+            print("[ Seat " + str(i+1) + "] " + self.player_seats[i] + ": " + self.players[i].HOLDER)
+    def flop(self):
+        self.dealer.draw_cards(deck, 3)
+    def turn(self):
+        self.dealer.draw_cards(deck, 1)
+    def river(self):
+        self.dealer.draw_cards(deck, 1)
 
+def game_start(table):
 
+    print("Welcome to Poka.py. This is just a game of Hold'em.")
 
-the_house = Deck()
-the_house.shuffle()
-the_house.display_deck()
+    print("We begin by entering our names. Please enter Player 1's name.")
+    this_player = input("> ")
+    table.register_player(this_player)
 
-dealio = DealerHAnd("Dealdev")
+    print("Player 1 \"" + this_player + "\" added as Small Blind.")
+    print("Please enter Player 2's name.")
+    this_player = input("> ")
+    table.register_player(this_player)
 
-my_hand = PlayerHand("Undev")
-your_hand = PlayerHand("Overdev")
+    print("Player 2 \"" + this_player + "\" added as Big Blind.")
+    print("Would you like to add more players? [Y/N]")
+    while True:
+        yn = input("> ").upper()
+        if yn in ["Y", "N"]:
+            break
+        else:
+            print("Invalid input, please try again.")
+    if yn == "Y":
+        while True:
+            player_count = 3
+            print("Please enter Player " + str(player_count) + "'s name.")
+            this_player = input("> ")
+            table.register_player(this_player)
+            print("Player " + str(player_count) + " \"" + this_player + "\" added as " + table.player_seats[player_count-1] + ".")
+            player_count += 1
+            print("Would you like to add more players? [Y/N]")
+            if player_count == 10:
+                print("That's the maximum amount of players.")
+                break
+            while True:
+                yn = input("> ").upper()
+                if yn in ["Y", "N"]:
+                    break
+                else:
+                    print("Invalid input, please try again.")
+            if yn == "N":
+                break
+    print("All done.")
+    print("Here are the players.")
+    table.show_players()
 
-print("Drawing cards for everyone.")
+def game_update(table):
+    return
 
-my_hand.draw_cards(the_house, 2)
-my_hand.display_hand()
-your_hand.draw_cards(the_house, 2)
-your_hand.display_hand()
+le_tableau = Table("Mr. Wiener")
 
-print("Flop.")
-dealio.draw_cards(the_house, 3)
-dealio.display_table()
-
-# the_house.display_deck()
-
-my_hand.raise_bet(1000)
-your_hand.raise_bet(1300)
-
-print("Turn.")
-dealio.draw_cards(the_house, 1)
-dealio.display_table()
-
-my_hand.raise_bet(1000)
-
-print("River.")
-dealio.draw_cards(the_house, 1)
-dealio.display_table()
+game_start(le_tableau)
