@@ -40,4 +40,4 @@ You only need Python (preferably newer versions than 3.7.2) to interpret and run
 
 ## Contributors <a name = "contributors"></a>
 
-- [underdeveloper](https://github.com/underdeveloper)
+- [underdeveloper](https://github.com/underdeveloper) ![underdeveloper](https://avatars1.githubusercontent.com/u/44295228?s=40&v=4)

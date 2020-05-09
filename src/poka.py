@@ -1,4 +1,7 @@
 from random import shuffle as sh
+from time import sleep as pause
+from os import system
+import platform
 
 class Card:
     ''' A single card. '''
@@ -34,7 +37,7 @@ class Deck:
     def display_deck(self):
         for i in range(len(self.cards)):
             print(self.cards[i].display(), end=' ')
-        print("")
+        print(end="\n")
 
 class CardCollection:
     '''A collection of cards.'''
@@ -76,7 +79,7 @@ class HandPlayer(CardCollection):
         print(self.HOLDER + "'s hand:", end=' ')
         for i in range(len(self.cards)):
             print(self.cards[i].display(), end=' ')
-        print("")
+        print(end="\n")
     
     def raise_bet(self, money):
         print( self.HOLDER + " " + ("betting" if self.bet == 0 else "raising their bet by") + " " + str(money) + "." )
@@ -88,7 +91,7 @@ class HandDealer(CardCollection):
         print("These are on the table:", end=' ')
         for i in range(len(self.cards)):
             print(self.cards[i].display(), end=' ')
-        print("")
+        print(end="\n")
 
 class Table():
     def __init__(self, dealer_name):
@@ -156,6 +159,16 @@ def game_start(table):
     table.show_players()
 
 def game_pre_flop(table):
+    table.deck.display_deck()
+    print("Shuffling deck.")
+    pause(0.5)
+    for i in range(0,100):
+        print("[" + ("=" * (i//2)) + (" " * ((100-i)//2)) + "]", end='\r')
+        table.deck.shuffle()
+        pause(0.01)
+    print("[" + ("=" * 50) + "]")
+    print("Deck shuffled.")
+    print("")
     return
 
 def game_post_flop(table):
